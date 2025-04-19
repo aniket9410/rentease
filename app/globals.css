@@ -2,20 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Your existing CSS below */
+html, 
+body, 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  height: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
 }
