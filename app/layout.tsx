@@ -10,6 +10,7 @@ import LoginModal from "./components/modals/loginModal";
 import SplashScreen from "./components/splashScreen";
 import getCurrentUser from "./actions/getCurrentUser";
 import RentModal from "./components/modals/rentModal";
+import SearchModal from "./components/modals/searchModal";
 
 // Configure Geist fonts as variables
 const geistSans = Geist({
@@ -50,6 +51,7 @@ export default async function RootLayout({
           <ToasterProvider/>
           <RegisterModal />
           <RentModal />
+          <SearchModal />
           <LoginModal />
           < Navbar currentUser={currentUser} />
         </ClientOnly>

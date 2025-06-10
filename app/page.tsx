@@ -1,13 +1,17 @@
 import ClientOnly from "./components/clientonly";
 import Container from "./components/container";
 import EmptyState from "./components/emptyState";
-import getListings from "./actions/getListings";
+import getListings, { IListingsParams } from "./actions/getListings";
 import ListingCard from "./components/listings/listingCard";
 import getCurrentUser from "./actions/getCurrentUser";
 
-export default async function Home() {
+interface HomeProps{
+  searchParams: IListingsParams
+}
 
-  const listings = await getListings();
+const Home = async ({ searchParams }: HomeProps) => {
+
+  const listings = await getListings(searchParams);
 
   const currentUser = await getCurrentUser()
 
@@ -33,7 +37,7 @@ export default async function Home() {
           2xl:grid-cols-6
           gap-8
         ">
-          {listings.map((listing: any) => {
+          {listings.map((listing) => {
             return (
               <ListingCard
                 currentUser={currentUser}
@@ -47,3 +51,5 @@ export default async function Home() {
     </ClientOnly>
   );
 }
+
+export default Home

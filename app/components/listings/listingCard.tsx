@@ -14,11 +14,11 @@ import HeartButton from "../heartbutton";
 
 
 import Button from "../button"
-import { SafeUser } from "@/app/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
 interface ListingCardProps {
-    data: Listing;
-    reservation?: Reservation;
+    data: SafeListing;
+    reservation?: SafeReservation;
     onAction?: (id: string) => void;
     disabled?: boolean;
     actionLabel?: string;
@@ -81,23 +81,18 @@ const ListingCard: React.FC<ListingCardProps> = ({
                 col-span-1 cursor-pointer group
             "
         >
-            <div className="flex flex-col gap-2 w-full">
-            <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+            <div className="flex flex-col gap-2  w-full">
+            <div className="aspect-square w-full relative overflow-hidden rounded-xl z-0">
                 <Image
-                    fill
-                    alt={data.title || "Listing"}  // Use a meaningful alt text
-                    className="object-cover h-full w-full group-hover:scale-110 transition"
+                    alt="Listing"
                     src={data.imageSrc}
+                    className="object-cover h-full w-full group-hover:scale-110 transition"
+                    fill
                 />
-
                 <div className="absolute top-3 right-3">
-                    <HeartButton
-                        listingId={data.id}
-                        currentUser={currentUser}
-                    />
-
+                    <HeartButton listingId={data.id} currentUser={currentUser} />
                 </div>
-                </div>
+            </div>
 
                 <div className="font-semibold text-lg">
                     {location?.region}, {location?.label}
