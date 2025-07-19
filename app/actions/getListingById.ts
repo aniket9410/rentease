@@ -6,7 +6,7 @@ interface IParams {
 
 export default async function getListingById(params: IParams) {
     try {
-        const {listingId} = params;
+        const { listingId } = params;
 
         if (!listingId || typeof listingId !== "string") {
             throw new Error("Invalid ID");
@@ -35,7 +35,10 @@ export default async function getListingById(params: IParams) {
                 emailVerified: listing.user.emailVerified?.toISOString() || null,
             },
         }
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(error.message);
+        }
+        throw new Error("An unknown error occurred.");
     }
 }

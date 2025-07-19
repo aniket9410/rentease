@@ -6,7 +6,7 @@ import { MdOutlineVilla } from "react-icons/md";
 import Container from "../container";
 import { TbBeach, TbMountain, TbPool, TbWindmill } from "react-icons/tb";
 import { usePathname, useSearchParams } from "next/navigation";
-import { GiBarn, GiBoatFishing, GiCactus, GiCampingTent, GiCastle, GiCaveEntrance, GiForestCamp, GiIsland } from "react-icons/gi";
+import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCaveEntrance, GiForestCamp, GiIsland } from "react-icons/gi";
 import { FaSkiing } from "react-icons/fa";
 import { BsSnow } from "react-icons/bs";
 import { IoDiamond } from "react-icons/io5";

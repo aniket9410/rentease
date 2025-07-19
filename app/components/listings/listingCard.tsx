@@ -3,9 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import useCountries from "@/app/hooks/useCountries";
-import { Reservation } from "@prisma/client";
-import { Listing } from "@prisma/client";
-import { User } from "@prisma/client"
+
 import { useCallback } from "react";
 import { useMemo } from "react";
 import { format } from "date-fns";

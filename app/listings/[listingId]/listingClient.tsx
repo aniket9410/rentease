@@ -2,7 +2,7 @@
 
 import axios from "axios"
 import { toast } from "react-hot-toast"
-import { Reservation } from "@prisma/client"
+
 
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types"
 

@@ -1,41 +1,50 @@
-'use client'
+"use client";
 
-import { CldUploadWidget } from "next-cloudinary";
+import {
+  CldUploadWidget,
+  CloudinaryUploadWidgetResults,
+} from "next-cloudinary";
 import Image from "next/image";
 import { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 declare global {
-    var cloudinary: any;
+  // eslint-disable-next-line no-var
+  var cloudinary: unknown;
 }
 
 interface ImageUploadProps {
-    onChange: (value: string) => void;
-    value: string;
+  onChange: (value: string) => void;
+  value: string;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({
-    onChange,
-    value
+const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
+  const handleUpload = useCallback(
+    (result: CloudinaryUploadWidgetResults) => {
+      if (
+        result.event === "success" &&
+        result.info !== undefined &&
+        typeof result.info !== "string"
+      ) {
+        onChange(result.info.secure_url);
+      }
+    },
+    [onChange]
+  );
 
-}) =>{
-    const handleUpload = useCallback((result: any) => {
-        onChange(result.info.secure_url)
-    }, [onChange])
-
-    return (
-        <CldUploadWidget
-            onSuccess={handleUpload}
-            uploadPreset="my_unsign" // Your preset name here
-            options={{
-                maxFiles: 1
-            }}
-        >   
-            {({ open }) => {
-                return(
-                    <div
-                        onClick={() => open?.()}
-                        className="
+  return (
+    <CldUploadWidget
+      onSuccess={handleUpload}
+      uploadPreset="my_unsign" // Your preset name here
+      options={{
+        maxFiles: 1,
+      }}
+    >
+      {({ open }) => {
+        return (
+          <div
+            onClick={() => open?.()}
+            className="
                             relative
                             cursor-pointer
                             hover:opacity-70
@@ -51,26 +60,24 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                             gap-4
                             text-neutral-600
                         "
-                    >
-                        <TbPhotoPlus size={50} />
-                        <div className="font-semibold text-lg">
-                            Click to upload
-                        </div>
-                        {value && (
-                            <div className="absolute inset-0 w-full h-full">
-                                <Image
-                                    fill
-                                    style={{ objectFit: 'cover' }}
-                                    src={value}
-                                    alt="Upload"
-                                />
-                            </div>
-                        )}
-                    </div>
-                )
-            }}
-        </CldUploadWidget>
-    )
-}
+          >
+            <TbPhotoPlus size={50} />
+            <div className="font-semibold text-lg">Click to upload</div>
+            {value && (
+              <div className="absolute inset-0 w-full h-full">
+                <Image
+                  fill
+                  style={{ objectFit: "cover" }}
+                  src={value}
+                  alt="Upload"
+                />
+              </div>
+            )}
+          </div>
+        );
+      }}
+    </CldUploadWidget>
+  );
+};
 
-export default ImageUpload
+export default ImageUpload;

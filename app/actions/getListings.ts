@@ -1,5 +1,7 @@
 import prisma from "@/app/libs/prismadb";
 
+import { Prisma } from "@prisma/client";
+
 export interface IListingsParams {
     userId?: string
     guestCount?: number
@@ -21,9 +23,9 @@ export default async function getListings(params: IListingsParams) {
             endDate,
             locationValue,
             category
-         } = params;
+        } = params;
 
-        let query: any = {};
+        const query: Prisma.ListingWhereInput = {};
 
         if (userId) {
             query.userId = userId;
@@ -80,33 +82,18 @@ export default async function getListings(params: IListingsParams) {
                 createdAt: "desc",
             }
         });
-        
+
         const safeListings = listings.map((listing) => ({
             ...listing,
-            createdAt: listing.createdAt.toISOString(), 
+            createdAt: listing.createdAt.toISOString(),
         }))
 
         return safeListings
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(error.message);
+        }
+        throw new Error("An unknown error occurred.");
     }
 }
 
-// export default async function getListings() {
-//     try {
-//         const listings = await prisma.listing.findMany({
-//             orderBy: {
-//                 createdAt: "desc",
-//             }
-//         });
-        
-//         const safeListings = listings.map((listing) => ({
-//             ...listing,
-//             createdAt: listing.createdAt.toISOString(), 
-//         }))
-
-//         return safeListings
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }

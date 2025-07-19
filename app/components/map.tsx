@@ -1,18 +1,18 @@
 'use client'
 
 import L from 'leaflet'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
-// @ts-ignore
+// @ts-expect-error leaflet typings do not include _getIconUrl override
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconUrl: markerIcon,          // Removed .src
-    iconRetinaUrl: markerIcon2x,   // Removed .src
-    shadowUrl: markerShadow,       // Removed .src
+    iconUrl: markerIcon,          
+    iconRetinaUrl: markerIcon2x,   
+    shadowUrl: markerShadow,       
 })
 
 interface MapProps {

@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast'
 import { SafeUser } from '../types'
 
 import useLoginModal from './useLoginModal'
-import { list } from 'postcss'
+
 
 interface IUseFavorite {
     listingId: string
@@ -46,7 +46,7 @@ const useFavorite = ({
                 await request();
                 router.refresh();
                 toast.success('Success')
-            } catch (error) {
+            } catch {
                 toast.error('Something went wrong')
             }
         }, [

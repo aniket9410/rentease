@@ -1,6 +1,6 @@
 'use client'
 
-import { SafeListing, SafeUser } from "@/app/types"
+import {  SafeUser } from "@/app/types"
 import React from "react"
 import Heading from "../heading"
 import useCountries from "@/app/hooks/useCountries"

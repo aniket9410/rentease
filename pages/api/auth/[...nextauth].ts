@@ -5,8 +5,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import prisma from '@/app/libs/prismadb'
-import { signIn } from "next-auth/react";
-import { PiStrategy } from "react-icons/pi";
+
 import bcrypt from 'bcrypt'
 
 
